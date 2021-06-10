@@ -22,10 +22,11 @@ class Director:
         """
         self._cast = cast
         self._script = script
+        self._keep_playing = True
         
     def start_game(self):
         """Starts the game loop to control the sequence of play."""
-        while True:
+        while self._keep_playing:
             self._cue_action("input")
             self._cue_action("update")
             self._cue_action("output")

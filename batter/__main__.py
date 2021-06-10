@@ -17,10 +17,10 @@ def main(screen):
     cast = {}
 
     x = int(constants.MAX_X / 2)
-    y = int(constants.MAX_Y - 1)
+    y = int(constants.MAX_Y - 2)
     position = Point(x, y)
     paddle = Actor()
-    paddle.set_text("===========")
+    paddle.set_text("==========")
     paddle.set_position(position)
     cast["paddle"] = [paddle]
 

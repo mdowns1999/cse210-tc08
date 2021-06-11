@@ -3,6 +3,7 @@ from game import constants
 from game.director import Director
 from game.actor import Actor
 from game.point import Point
+from game.score import Score
 from game.control_actors_action import ControlActorsAction
 from game.draw_actors_action import DrawActorsAction
 from game.handle_collisions_action import HandleCollisionsAction
@@ -48,10 +49,11 @@ def main(screen):
 
     input_service = InputService(screen)
     output_service = OutputService(screen)
+    score = Score()
     control_actors_action = ControlActorsAction(input_service)
     move_actors_action = MoveActorsAction()
-    handle_collisions_acition = HandleCollisionsAction()
-    draw_actors_action = DrawActorsAction(output_service)
+    handle_collisions_acition = HandleCollisionsAction(score)
+    draw_actors_action = DrawActorsAction(output_service, score)
     
     script["input"] = [control_actors_action]
     script["update"] = [move_actors_action, handle_collisions_acition]

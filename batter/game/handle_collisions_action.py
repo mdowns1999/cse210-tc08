@@ -11,11 +11,11 @@ class HandleCollisionsAction(Action):
     Stereotype:
         Controller
     """
-    def __init__(self):
+    def __init__(self, score):
 
-        self._score = Score()
-
+        self._score = score
         self._points = 0
+        self._count = 0
 
     def execute(self, cast):
         """Executes the action using the given actors.
@@ -65,15 +65,36 @@ class HandleCollisionsAction(Action):
                 if x == 1 and y == -1: 
                     velocity = Point(x, y * -1)
 
-                elif x == 1 and y == -1:
-                    velocity = Point(x * -1, y)
+                elif x == -1 and y == -1:
+                    velocity = Point(x, y * -1)
+
+                elif x == 1 and y == 1:
+                    velocity = Point(x, y * -1)
+                
+                elif x == -1 and y == 1:
+                    velocity = Point(x, y * -1)
                 
                 ball.set_velocity(velocity)
                 self._score.add_points(self._points)
         
         if ball.get_position().get_y() == constants.MAX_Y - 1:
-            print("Game over!")
-            sys.exit()
+            if self._count != 3:
+                ball_x = int(constants.MAX_X / 2)
+                ball_y = int(constants.MAX_Y / 2)
+                position = Point(ball_x, ball_y)
+                ball.set_position(position)
+
+                paddle_x = int(constants.MAX_X / 2)
+                paddle_y = int(constants.MAX_Y - 2)
+                position = Point(paddle_x, paddle_y)
+                paddle.set_position(position)
+
+                self._count += 1
+
+            else:
+                print("Game over!")
+                print(f"Final Score: {self._score.get_points()}")
+                sys.exit()
         
         elif ball.get_position().get_x() == constants.MAX_X - 79:
             velocity = ball.get_velocity()

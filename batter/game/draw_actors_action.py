@@ -12,14 +12,14 @@ class DrawActorsAction(Action):
         _output_service (OutputService): An instance of OutputService.
     """
 
-    def __init__(self, output_service):
+    def __init__(self, output_service, score):
         """The class constructor.
         
         Args:
             output_service (OutputService): An instance of OutputService.
         """
         self._output_service = output_service
-        self._score = Score()
+        self._score = score
 
     def execute(self, cast):
         """Executes the action using the given actors.
@@ -30,5 +30,5 @@ class DrawActorsAction(Action):
         self._output_service.clear_screen()
         for group in cast.values():
             self._output_service.draw_actors(group)
-        self._output_service.draw_actor(self._score.get_points())
+        self._output_service.draw_actor(self._score)
         self._output_service.flush_buffer()

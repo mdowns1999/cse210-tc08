@@ -1,4 +1,5 @@
 from game.action import Action
+from game.score import Score
 
 class DrawActorsAction(Action):
     """A code template for drawing actors. The responsibility of this class of
@@ -18,6 +19,7 @@ class DrawActorsAction(Action):
             output_service (OutputService): An instance of OutputService.
         """
         self._output_service = output_service
+        self._score = Score()
 
     def execute(self, cast):
         """Executes the action using the given actors.
@@ -28,4 +30,5 @@ class DrawActorsAction(Action):
         self._output_service.clear_screen()
         for group in cast.values():
             self._output_service.draw_actors(group)
+        self._output_service.draw_actor(self._score.get_points())
         self._output_service.flush_buffer()

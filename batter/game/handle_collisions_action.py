@@ -3,6 +3,7 @@ import sys
 from game import constants
 from game.action import Action
 from game.point import Point
+from game.score import Score
 
 class HandleCollisionsAction(Action):
     """A code template for handling collisions. The responsibility of this class of objects is to update the game state when actors collide.
@@ -10,6 +11,11 @@ class HandleCollisionsAction(Action):
     Stereotype:
         Controller
     """
+    def __init__(self):
+
+        self._score = Score()
+
+        self._points = 0
 
     def execute(self, cast):
         """Executes the action using the given actors.
@@ -49,6 +55,8 @@ class HandleCollisionsAction(Action):
             if ball.get_position().equals(brick.get_position()):
                 # remove the brick
                 bricks.remove(brick)
+
+                self._points = 1
                 # change ball velocity
                 velocity = ball.get_velocity()
                 x = (velocity.get_x()) 
@@ -61,6 +69,7 @@ class HandleCollisionsAction(Action):
                     velocity = Point(x * -1, y)
                 
                 ball.set_velocity(velocity)
+                self._score.add_points(self._points)
         
         if ball.get_position().get_y() == constants.MAX_Y - 1:
             print("Game over!")

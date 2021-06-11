@@ -40,3 +40,6 @@ root                    (project root folder)
 ## Authors
 ---
 * # TODO: Add your names and emails here
+Kendrick Mausisa, kmausisa@byui.edu
+Mike Downs, downmich@byui.edu
+Joseph Blackford, bla12053@byui.edu
